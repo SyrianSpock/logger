@@ -35,9 +35,9 @@ int main()
 {
     Logger logger;
 
-    logger.record(__FUNCTION__, Rectangle{12, 42});
-    logger.record(__FUNCTION__, Circle{10});
-    logger.record(__FUNCTION__, Sprite{"monster.png"});
+    logger.record(__FUNCTION__, __LINE__, Rectangle{12, 42});
+    logger.record(__FUNCTION__, __LINE__, Circle{10});
+    logger.record(__FUNCTION__, __LINE__, Sprite{"monster.png"});
 
     logger.displayEvents();
 }

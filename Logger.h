@@ -1,5 +1,7 @@
 #include "Displayable.h"
 
+#define LOG(logger, event) (logger.record(__FUNCTION__, __LINE__, event))
+
 struct LogEvent
 {
     LogEvent(const std::string& _callerName, int _callerLine, Displayable&& _event)

@@ -1,11 +1,11 @@
-#include "LogEvent.h"
+#include "Displayable.h"
 
 class Logger
 {
 public:
     Logger() = default;
 
-    void record(LogEvent&& event)
+    void record(Displayable&& event)
     {
         m_events.push_back(std::move(event));
     }
@@ -19,5 +19,5 @@ public:
     }
 
 private:
-    std::vector<LogEvent> m_events;
+    std::vector<Displayable> m_events;
 };

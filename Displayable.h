@@ -4,28 +4,28 @@
 #include <utility>
 #include <vector>
 
-class LogEvent
+class Displayable
 {
 public:
-    LogEvent() = default;
+    Displayable() = default;
 
-    LogEvent(const LogEvent&) = delete;
-    LogEvent(LogEvent&&) = default;
-
-    template <typename T>
-    LogEvent(T&& impl) : m_impl(new model_t<std::decay_t<T>>(std::forward<T>(impl))) {}
-
-    LogEvent& operator=(const LogEvent&) = delete;
-    LogEvent& operator=(LogEvent&&) = default;
+    Displayable(const Displayable&) = delete;
+    Displayable(Displayable&&) = default;
 
     template <typename T>
-    LogEvent& operator=(T&& impl)
+    Displayable(T&& impl) : m_impl(new model_t<std::decay_t<T>>(std::forward<T>(impl))) {}
+
+    Displayable& operator=(const Displayable&) = delete;
+    Displayable& operator=(Displayable&&) = default;
+
+    template <typename T>
+    Displayable& operator=(T&& impl)
     {
         m_impl.reset(new model_t<std::decay_t<T>>(std::forward<T>(impl)));
         return *this;
     }
 
-    friend void display(const LogEvent& d)
+    friend void display(const Displayable& d)
     {
         d.m_impl->do_display();
     }

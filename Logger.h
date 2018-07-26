@@ -1,13 +1,32 @@
 #include "Displayable.h"
 
+struct LogEvent
+{
+    LogEvent(const std::string& _callerName, Displayable&& _event)
+          : callerName(_callerName)
+          , event(std::move(_event))
+    {
+    }
+
+    std::string callerName;
+    Displayable event;
+};
+
+void display(const LogEvent& log)
+{
+    std::cout << "[" << log.callerName << "]";
+    std::cout << " ";
+    display(log.event);
+}
+
 class Logger
 {
 public:
     Logger() = default;
 
-    void record(Displayable&& event)
+    void record(const std::string& callerName, Displayable&& event)
     {
-        m_events.push_back(std::move(event));
+        m_events.emplace_back(callerName, std::move(event));
     }
 
     void displayEvents() const
@@ -19,5 +38,5 @@ public:
     }
 
 private:
-    std::vector<Displayable> m_events;
+    std::vector<LogEvent> m_events;
 };

@@ -5,7 +5,7 @@
 
 struct LogEvent
 {
-    enum class Level
+    enum class Level : int
     {
         Error,
         Warning,

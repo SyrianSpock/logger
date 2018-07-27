@@ -16,11 +16,14 @@ public:
         m_events.emplace_back(level, time, callerName, callerLine, std::move(event));
     }
 
-    void displayEvents() const
+    void displayEvents(LogEvent::Level severityLevel) const
     {
         for (const auto& event : m_events)
         {
-            display(event);
+            if (event.level <= severityLevel)
+            {
+                display(event);
+            }
         }
     }
 

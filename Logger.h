@@ -1,6 +1,9 @@
 #include "LogEvent.h"
 
-#define LOG(logger, event) (logger.record(LogEvent::Level::Info, std::time(0), __FUNCTION__, __LINE__, event))
+#define LOG_ERROR(logger, event) (logger.record(LogEvent::Level::Error, std::time(0), __FUNCTION__, __LINE__, event))
+#define LOG_WARN(logger, event) (logger.record(LogEvent::Level::Warning, std::time(0), __FUNCTION__, __LINE__, event))
+#define LOG_INFO(logger, event) (logger.record(LogEvent::Level::Info, std::time(0), __FUNCTION__, __LINE__, event))
+#define LOG_DEBUG(logger, event) (logger.record(LogEvent::Level::Debug, std::time(0), __FUNCTION__, __LINE__, event))
 
 class Logger
 {

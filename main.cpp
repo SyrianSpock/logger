@@ -35,9 +35,9 @@ int main()
 {
     Logger logger;
 
-    LOG(logger, Rectangle({12, 42}));
-    LOG(logger, Circle({10}));
-    LOG(logger, Sprite({"monster.png"}));
+    LOG_ERROR(logger, Rectangle({12, 42}));
+    LOG_WARN(logger, Circle({10}));
+    LOG_INFO(logger, Sprite({"monster.png"}));
 
     logger.displayEvents();
 }

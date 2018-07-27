@@ -3,17 +3,17 @@
 
 #include "Displayable.h"
 
+enum class LogLevel : int
+{
+    Error,
+    Warning,
+    Info,
+    Debug,
+};
+
 struct LogEvent
 {
-    enum class Level : int
-    {
-        Error,
-        Warning,
-        Info,
-        Debug,
-    };
-
-    LogEvent(Level _level, const std::time_t& _time, const std::string& _callerName, int _callerLine,
+    LogEvent(LogLevel _level, const std::time_t& _time, const std::string& _callerName, int _callerLine,
              Displayable&& _event)
           : level(_level)
           , time(_time)
@@ -23,7 +23,7 @@ struct LogEvent
     {
     }
 
-    Level level;
+    LogLevel level;
     std::time_t time;
     std::string callerName;
     int callerLine;
@@ -40,11 +40,12 @@ std::string dateTime(const time_t& now)
     return buf;
 }
 
-std::string toString(const LogEvent::Level& level)
+std::string toString(const LogLevel& level)
 {
-    return std::map<LogEvent::Level, std::string>{
-        {LogEvent::Level::Error, "ERROR"}, {LogEvent::Level::Warning, "WARNING"}, {LogEvent::Level::Info, "INFO"},
-        {LogEvent::Level::Debug, "DEBUG"}}[level];
+    return std::map<LogLevel, std::string>{{LogLevel::Error, "ERROR"},
+                                           {LogLevel::Warning, "WARNING"},
+                                           {LogLevel::Info, "INFO"},
+                                           {LogLevel::Debug, "DEBUG"}}[level];
 }
 
 void display(const LogEvent& log)

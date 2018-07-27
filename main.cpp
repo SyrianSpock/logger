@@ -39,5 +39,5 @@ int main()
     LOG_WARN(logger, Circle({10}));
     LOG_INFO(logger, Sprite({"monster.png"}));
 
-    logger.displayEvents(LogEvent::Level::Info);
+    logger.displayEvents(LogLevel::Info);
 }

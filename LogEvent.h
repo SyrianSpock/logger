@@ -48,8 +48,17 @@ std::string toString(const LogLevel& level)
                                            {LogLevel::Debug, "DEBUG"}}[level];
 }
 
+std::string toColor(const LogLevel& level)
+{
+    return std::map<LogLevel, std::string>{{LogLevel::Error, "\x1b[31;1m"},
+                                           {LogLevel::Warning, "\x1b[33;1m"},
+                                           {LogLevel::Info, "\x1b[0;1m"},
+                                           {LogLevel::Debug, "\x1b[34;1m"}}[level];
+}
+
 void display(const LogEvent& log)
 {
+    std::cout << toColor(log.level);
     std::cout << "[" << dateTime(log.time) << "]";
     std::cout << "[" << toString(log.level) << "]";
     std::cout << "[" << log.callerName << ":" << log.callerLine << "]";
